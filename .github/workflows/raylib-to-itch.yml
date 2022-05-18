@@ -16,45 +16,43 @@ jobs:
       with:
         submodules: recursive
 
-    # install asdf
-    - name: asdf-install
+    - name: install-asdf
       run: |
         sudo apt install curl git zip
         git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-    # install emcc
     - name: install-emscripten
       run: |
         . $HOME/.asdf/asdf.sh
         asdf plugin add emsdk https://github.com/RobLoach/asdf-emsdk.git
+        # the following installs emscripten according to whatever version
+        # is specified in the .tools-version file
         asdf install emsdk
-    # compile raylib
-    - name: compile-raylib
+    - name: build-raylib
       run: |
         . $HOME/.asdf/asdf.sh
         mkdir lib && mkdir lib/web
         cd dependency/raylib/src
         make PLATFORM=PLATFORM_WEB -B -e
         cp libraylib.a ../../../lib/web/
-    # make
-    - name: build
+    - name: build-web-game
       run: |
         . $HOME/.asdf/asdf.sh
         make web
         cd output/web
         zip game.zip index.*
-    # install itch butler
-    - name: install-butler
+    - name: install-itch-butler
       run: |
         curl -L -o butler.zip  https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
         unzip butler.zip
         chmod +x butler
         ./butler -V
     # upload zip
-    - name: upload
+    - name: upload-to-itch
       env:
         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       run: |
         cd output/web
         ./../../butler login
+        # edit the line below: user/game-name:platform
         ./../../butler push game.zip tradam/raylib-template-test:html5
         ./../../butler logout
