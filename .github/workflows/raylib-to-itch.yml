@@ -42,4 +42,19 @@ jobs:
         make web
         cd output/web
         zip game.zip index.*
+    # install itch butler
+    - name: install-butler
+      run: |
+        curl -L -o butler.zip  https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+        unzip butler.zip
+        chmod +x butler
+        ./butler -V
     # upload zip
+    - name: upload
+      env:
+        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      run: |
+        cd output/web
+        ./butler login
+        ./butler push game.zip tradam/raylib-template-test:html5
+        ./butler logout
