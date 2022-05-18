@@ -1,0 +1,40 @@
+name: Raylib to Itch
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    # install asdf
+    - name: asdf-install
+      run: |
+        apt install curl git zip
+        git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+        run: . $HOME/.asdf/completions/asdf.bash
+    # install emcc
+    - name: install-emscripten
+      run: |
+        asdf plugin add emsdk
+        asdf install emsdk
+    # compile raylib
+    - name: compile-raylib
+      run: |
+        mkdir lib && mkdir lib/web
+        cd dependencies/raylib/src
+        make PLATFORM=PLATFORM_WEB -B -e
+        cp libraylib.a ../../../lib/web/
+    # make
+    - name: build
+      run: |
+        make web
+        cd output
+        zip game.zip index.*
+    # upload zip
