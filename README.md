@@ -1,4 +1,8 @@
 # Github Actions Template For Raylib HTML5 Games
+
+[![MIT License](https://img.shields.io/github/license/realtradam/raylib-template)](https://github.com/realtradam/raylib-template/blob/master/LICENSE)
+[![Ko-Fi](https://img.shields.io/static/v1?message=Buy%20me%20a%20coffee&logo=kofi&labelColor=ff5e5b&color=434B57&logoColor=white&label=%20)](https://ko-fi.com/tradam)
+
 This template allows you to automatically build your game and then upload it to itch.io when you push to master.
 
 ### How modify for your use
@@ -10,4 +14,4 @@ This template allows you to automatically build your game and then upload it to 
     - Name it `BUTLER_API_KEY`
 4. Make sure to set a viewport for your game on Itch.io
 
-And that should be it, you game should automatically compile and uplaod to itch when you push to the master branch.
+And that should be it, your game should automatically compile and upload to itch when you push to the master branch.
