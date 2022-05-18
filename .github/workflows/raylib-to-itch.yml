@@ -40,6 +40,6 @@ jobs:
       run: |
         . $HOME/.asdf/asdf.sh
         make web
-        cd output
+        cd output/web
         zip game.zip index.*
     # upload zip
