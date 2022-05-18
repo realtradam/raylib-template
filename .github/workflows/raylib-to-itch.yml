@@ -22,8 +22,8 @@ jobs:
     - name: install-emscripten
       run: |
         . $HOME/.asdf/asdf.sh
-        asdf install emsdk https://github.com/RobLoach/asdf-emsdk.git
-        asdf plugin add emsdk
+        asdf plugin add emsdk https://github.com/RobLoach/asdf-emsdk.git
+        asdf install emsdk
     # compile raylib
     - name: compile-raylib
       run: |
