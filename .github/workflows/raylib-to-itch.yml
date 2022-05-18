@@ -18,15 +18,16 @@ jobs:
       run: |
         sudo apt install curl git zip
         git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-        . $HOME/.asdf/asdf.sh
     # install emcc
     - name: install-emscripten
       run: |
+        . $HOME/.asdf/asdf.sh
         asdf install emsdk
         asdf plugin add emsdk
     # compile raylib
     - name: compile-raylib
       run: |
+        . $HOME/.asdf/asdf.sh
         mkdir lib && mkdir lib/web
         cd dependencies/raylib/src
         make PLATFORM=PLATFORM_WEB -B -e
@@ -34,6 +35,7 @@ jobs:
     # make
     - name: build
       run: |
+        . $HOME/.asdf/asdf.sh
         make web
         cd output
         zip game.zip index.*
