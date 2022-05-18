@@ -55,6 +55,6 @@ jobs:
         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
       run: |
         cd output/web
-        ./butler login
-        ./butler push game.zip tradam/raylib-template-test:html5
-        ./butler logout
+        ./../../butler login
+        ./../../butler push game.zip tradam/raylib-template-test:html5
+        ./../../butler logout
