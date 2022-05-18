@@ -18,7 +18,7 @@ jobs:
       run: |
         sudo apt install curl git zip
         git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-        run: . $HOME/.asdf/completions/asdf.bash
+        . $HOME/.asdf/completions/asdf.bash
     # install emcc
     - name: install-emscripten
       run: |
