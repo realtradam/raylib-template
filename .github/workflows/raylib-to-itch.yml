@@ -18,12 +18,12 @@ jobs:
       run: |
         sudo apt install curl git zip
         git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-        . $HOME/.asdf/completions/asdf.bash
+        . $HOME/.asdf/asdf.sh
     # install emcc
     - name: install-emscripten
       run: |
-        asdf plugin add emsdk
         asdf install emsdk
+        asdf plugin add emsdk
     # compile raylib
     - name: compile-raylib
       run: |
